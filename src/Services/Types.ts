@@ -1,26 +1,19 @@
-import type { } from '../State/Types'
+import type { Recipe, PaginatedQuery } from '../State/Types'
 
 interface IRecipeService {
+    /**
+     * Gets Recipes
+     * @param request - paginated query
+     * @returns {Promise<Recipe[]>} - recipes
+     */
+    getRecipes(request: PaginatedQuery) : Promise<Recipe[]>
 
-    stub()
-
-    // /**
-    //  * Gets Recipes
-    //  * @param page
-    //  * @param itemsPerPage
-    //  * @returns {Promise<Recipe[]>} - recipes
-    //  */
-    // getTickets(page: number, itemsPerPage: number) : Promise<Recipe[]>
-
-    // /**
-    //  * Creates a Recipe
-    //  * @param title
-    //  * @param imageData
-    //  * @param ingredients
-    //  * @param instructions
-    //  * @returns {Promise<Recipe>} - created ticket
-    //  */
-    // createRecipe(title: string, imageData: string, ingredients: string[], instructions: string[] /* create a type to hold order*/) : Promise<Recipe>
+    /**
+     * Creates a Recipe
+     * @param recipe - new recipe
+     * @returns {Promise<Recipe>} - created recipe
+     */
+    createRecipe(recipe: Recipe) : Promise<Recipe>
 }
 
 export { IRecipeService }

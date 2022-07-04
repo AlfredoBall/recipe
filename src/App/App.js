@@ -1,7 +1,7 @@
 import './App.css';
 
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 // import PublicRoutes from './Infrastructure/PublicRoutes'
 
@@ -14,7 +14,7 @@ const App = () => {
       <Route path="/" element={<Main/>}/>
           {/* child routes */}
       </Routes>
-  </Router>
+    </Router>
   );
 }
 

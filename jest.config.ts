@@ -10,6 +10,9 @@ export default {
     // Stop running tests after `n` failures
     // bail: 0,
 
+    // The test environment that will be used for testing
+    "testEnvironment": "node",
+
     // Automatically clear mock calls, instances, contexts and results before every test
     clearMocks: true,
 
@@ -28,10 +31,16 @@ export default {
         "^.+\\.(js|jsx)$": "babel-jest",
     },
 
+    moduleNameMapper: {
+        "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/Tests/__mocks__/fileMock.ts",
+        "\\.(css|less)$": "<rootDir>/src/Tests/__mocks__/styleMock.ts"
+    },
+
     // A preset that is used as a base for Jest's configuration
     preset: 'ts-jest',
     //   An array of file extensions your modules use
     moduleFileExtensions: [
+        "css",
         "js",
         "mjs",
         "cjs",
@@ -144,9 +153,6 @@ export default {
 
     // A list of paths to snapshot serializer modules Jest should use for snapshot testing
     // snapshotSerializers: [],
-
-    // The test environment that will be used for testing
-    // testEnvironment: "jest-environment-node",
 
     // Options that will be passed to the testEnvironment
     // testEnvironmentOptions: {},

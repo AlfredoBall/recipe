@@ -1,19 +1,24 @@
-import { configureStore, AnyAction } from '@reduxjs/toolkit'
+import { configureStore, combineReducers, PreloadedState } from '@reduxjs/toolkit'
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
-import rootReducer from './Reducer';
+import recipe from './Recipe'
+
+const rootReducer = combineReducers({
+    recipe
+});
 
 export const store = configureStore({
   reducer: rootReducer
 })
 
+export function setupStore(preloadedState?: PreloadedState<RootState>) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState
+  })
+}
+
 /* Types */
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof rootReducer>;
-export type TypedDispatch = ThunkDispatch<RootState, any, AnyAction>;
-export type TypedThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  AnyAction
->;
+export type RootState = ReturnType<typeof rootReducer>
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']

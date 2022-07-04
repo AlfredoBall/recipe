@@ -12,7 +12,7 @@ Runs the app in the local mode.\
 Local mode swaps out real services for fake services that do not interact with environment resources
 Open [http://localhost:9000](http://localhost:9000) to view it in your browser.
 
-### `npm test`
+### `npm run test`
 
 Launches the Jest test runner in the interactive watch mode.\
 
@@ -23,3 +23,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
+
+## Styling
+

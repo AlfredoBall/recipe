@@ -7,7 +7,8 @@ import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import Header from '../../Components/Main/Header'
-import Gallery from '../../Components/Gallery'
+import Gallery from '../../Components/Main/Gallery'
+import Planning from '../../Components/Main/Planning'
 
 const Main = () => {
 
@@ -18,21 +19,11 @@ const Main = () => {
         </div>
         <div className={c(s.content)}>
           <div className="row">
-            <div className="col">
-              Test 1
+            <div className="col-8">
+              <Gallery/>
             </div>
-            <div className="col">
-              Test 2
-            </div>
-          </div>
-          <div className="row">
-            <div className="col">
-              Test 1
-            </div>
-          </div>
-          <div className="row">
-            <div className="col">
-              Test 1
+            <div className="col-4">
+              <Planning/>
             </div>
           </div>
         </div>

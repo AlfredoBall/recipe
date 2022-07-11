@@ -2,10 +2,3 @@
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(160px, 1fr));
 }
-
-.gallery .gallery-item {
-    /* flex: 1 0 21%;
-    margin: 5px;
-    height: 100px; */
-    background-color: blue;
-}

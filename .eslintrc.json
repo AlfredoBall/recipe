@@ -21,24 +21,17 @@
                 "allowString" : false,
                 "allowNumber" : false
             }
-        ]
-    },
-    "overrides": [
-        {
-            "files": ["*.tsx, *.jsx"],
-            "rules": {
-                "typescript-eslint/ban-types": [
-                    "error",
-                    {
-                        "extendDefaults": true,
-                        "types": {
-                            "{}": false
-                        }
-                    }
-                ]
+        ],
+        "@typescript-eslint/ban-types": [
+            "error",
+            {
+              "extendDefaults": true,
+              "types": {
+                "{}": false
+              }
             }
-        }
-    ]
+          ]
+    }
 }
 
 // *ignorePatterns - possibly for ignoring testing

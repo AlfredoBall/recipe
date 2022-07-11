@@ -1,0 +1,21 @@
+.ingredient-item {
+    display: flex;
+    flex-direction: horizontal;
+    justify-content: space-between;
+}
+
+.ingredient-item-new {
+    display: flex;
+    flex-direction: horizontal;
+    justify-content: space-between;
+}
+
+.font-pencil {
+    font-family: "Thin Pencil Handwriting";
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Thin Pencil Handwriting";
+    src: local("../../Fonts/Thin_Pencil_Handwriting.ttf"), format("truetype");
+}

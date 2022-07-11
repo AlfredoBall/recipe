@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { faker } from '@faker-js/faker'
-import _ from 'lodash';
+import _ from 'lodash'
 
 import { IRecipeService } from '../Types'
-import { Recipe, Instruction, PaginatedQuery } from '../../State/Types'
+import { Recipe, Instruction, Ingredient, PaginatedQuery } from '../../State/Types'
 
 export default class FakeRecipeService implements IRecipeService {
     async getRecipes(request: PaginatedQuery) : Promise<Recipe[]> {
@@ -22,7 +22,7 @@ export default class FakeRecipeService implements IRecipeService {
         return {
           id: faker.datatype.uuid(),
           title: faker.datatype.string(),
-        //   imageData: imageData,
+          imageData: undefined,
           ingredients: ingredients,
           instructions: instructions
         }
@@ -30,10 +30,16 @@ export default class FakeRecipeService implements IRecipeService {
 }
 
 const ingredients = [
-    "Celery",
-    "Tomatoes",
-    "Salt"
-]
+    {
+        text: "Celery"
+    },
+    {
+        text: "Tomatoes"
+    },
+    {
+        text: "Bread"
+    },
+] as Ingredient[]
 
 const instructions = [
     {

@@ -1,5 +1,11 @@
+type PlanningType = "GroceryList" | "Kitchen"
+
 type Instruction = {
     order: number,
+    text: string
+}
+
+type Ingredient = {
     text: string
 }
 
@@ -7,7 +13,8 @@ type Recipe = {
     id: string,
     title: string,
     imageData?: string,
-    ingredients: string[],
+    // Add an image type?
+    ingredients: Ingredient[],
     instructions: Instruction[]
 }
 
@@ -17,8 +24,14 @@ type PaginatedQuery = {
     searchTerm: string
 }
 
-type State = {
-    recipes: Recipe[]
+type Planning = {
+    kitchen: Ingredient[],
+    groceryList: Ingredient[]
 }
 
-export { Recipe, Instruction, PaginatedQuery, State };
+type State = {
+    recipes: Recipe[],
+    planning: Planning
+}
+
+export { Recipe, Instruction, Ingredient, PlanningType, PaginatedQuery, State };

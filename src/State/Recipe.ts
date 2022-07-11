@@ -28,11 +28,19 @@ const recipeSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addCase(getRecipes.fulfilled, (state, action) => {
+      console.log('inside getRecipies fulfilled');
+      console.log(action.payload);
       state.recipes = action.payload;
       return state;
     })
     .addCase(createRecipe.fulfilled, (state, action) => {
-      state.recipes.push(action.payload);
+      const index = state.recipes.findIndex(x => x.title === action.payload.title);
+      if (index !== -1) {
+        state.recipes[index] = action.payload
+      } else {
+        state.recipes.push(action.payload);
+      }
+      
       return state;
     })
   },

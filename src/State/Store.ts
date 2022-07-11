@@ -2,9 +2,11 @@ import { configureStore, combineReducers, PreloadedState } from '@reduxjs/toolki
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
 import recipe from './Recipe'
+import planning from './Planning'
 
 const rootReducer = combineReducers({
-    recipe
+    recipe,
+    planning
 });
 
 export const store = configureStore({

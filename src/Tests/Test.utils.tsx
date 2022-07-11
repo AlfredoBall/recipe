@@ -6,12 +6,10 @@ import type { PreloadedState } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
 import type { AppStore, RootState } from '../State/Store'
-// As a basic setup, import your same slice reducers
+
 import recipeReducer from '../State/Recipe'
+import planningReducer from '../State/Planning'
 
-
-// This type interface extends the default options for render from RTL, as well
-// as allows the user to specify other things such as initialState, store.
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: PreloadedState<RootState>
   store?: AppStore
@@ -22,7 +20,7 @@ export function renderWithProviders(
   {
     preloadedState = {},
     // Automatically create a store instance if no store was passed in
-    store = configureStore({ reducer: { recipe: recipeReducer }, preloadedState }),
+    store = configureStore({ reducer: { recipe: recipeReducer, planning: planningReducer }, preloadedState }),
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {

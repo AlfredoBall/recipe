@@ -1,13 +1,15 @@
 import React from 'react';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
-import { Recipe } from '../State/Types'
+import { Recipe } from '../../State/Types'
 
-import styles from './Styles/GalleryItem.css'
+import styles from '../Styles/GalleryItem.css'
 
-const GalleryItem = ({ recipe, className }: { recipe : Recipe, className : string }) => {
+import Ingredients from './Ingredients'
+
+const GalleryItem = ({ recipe }: { recipe : Recipe}) => {
     return (
-        <div className={`${styles.gallery_item} ${className}`}>
+        <div className={styles['gallery-item']}>
             <div>{recipe.title}</div>
             <div>
                 {recipe.imageData == null
@@ -18,6 +20,9 @@ const GalleryItem = ({ recipe, className }: { recipe : Recipe, className : strin
                     ? <AddPhotoAlternateIcon/>
                     : <img src={"data:image/png;base64, " + recipe.imageData}/>
                 }
+                <Ingredients data-testid="gallery-item-ingredients"
+                    isReadOnly={true} // TODO Make Ingredients blow up if the onAdd and onRemove inputs aren't provided and isReadOnly remains defaulted to false - low priority
+                    ingredients={recipe.ingredients}/>
             </div>
             
             

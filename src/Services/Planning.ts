@@ -7,19 +7,19 @@ import { Ingredient } from '../State/Types'
 
 class PlanningService implements IPlanningService {
     async getKitchen(): Promise<Ingredient[]> {
-        return (await axios.get('api/planning/kitchen')).data;
+        return (await axios.get('https://localhost:7250/api/planning/kitchen')).data;
     }
 
     async createKitchen(ingredients: Ingredient[]): Promise<Ingredient[]> {
-        return (await axios.post('api/planning/kitchen', ingredients)).data;
+        return (await axios.post('https://localhost:7250/api/planning/kitchen', ingredients)).data;
     }
 
     async getGroceryList(): Promise<Ingredient[]> {
-        return (await axios.get('api/planning/grocerylist')).data;
+        return (await axios.get('https://localhost:7250/api/planning/grocerylist')).data;
     }
 
     async createGroceryList(ingredients: Ingredient[]): Promise<Ingredient[]> {
-        return (await axios.post('api/planning/grocerylist', ingredients)).data;
+        return (await axios.post('https://localhost:7250/api/planning/grocerylist', ingredients)).data;
     }
 }
 

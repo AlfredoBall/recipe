@@ -1,5 +1,8 @@
+// https://blog.logrocket.com/react-form-validation-sollutions-ultimate-roundup/
+
 import React, { useCallback, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { Formik, Form, Field, ErrorMessage } from "formik"; // Ugh I hate forms but I guess it makes the most sense here
 
 import _ from 'lodash'
 
@@ -31,7 +34,17 @@ const RecipeEdit = () => {
     const recipe = useCallback(() => { // It's ok if the template uses this directly, let's see if it get updated
         // TODO rewrite this for bookmarks
         console.log('inside useCallback')
-        return _.find(recipes, (r : Recipe) => r.id.toString() === id)
+        if (id === undefined) {
+            return {
+                id: '',
+                title: '',
+                imageData: undefined,
+                ingredients: [],
+                instructions: []
+            }
+        } else {
+            return _.find(recipes, (r : Recipe) => r.id.toString() === id)
+        }
     }, recipes)() as Recipe
 
     const [state, setState] = useState<Recipe>(recipe)
@@ -58,16 +71,16 @@ const RecipeEdit = () => {
 
         reader.readAsDataURL(selectedFile as File);
 
-        const formData = new FormData();
+        // const formData = new FormData();
       
-        formData.append(
-          "myFile",
-          selectedFile ?? '',
-          selectedFile?.name
-        );
+        // formData.append(
+        //   "myFile",
+        //   selectedFile ?? '',
+        //   selectedFile?.name
+        // );
       
-        // Details of the uploaded file
-        console.log(selectedFile);
+        // // Details of the uploaded file
+        // console.log(selectedFile);
       
         // TODO
         // Request made to the backend api

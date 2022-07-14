@@ -1,8 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import SearchBar from './SearchBar'
 
 const Header = () => {
+    const navigate = useNavigate();
     return (
         <>
             <div className="row">
@@ -18,7 +20,7 @@ const Header = () => {
                     <SearchBar/>
                 </div>
                 <div className="col-4">
-                    <button>Create New Recipe</button>
+                    <button onClick={() => navigate("recipe/edit")}>Create New Recipe</button>
                 </div>
             </div>
         </>

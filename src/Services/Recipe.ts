@@ -7,10 +7,6 @@ import { IRecipeService } from "./Types"
 
 class RecipeService implements IRecipeService {
     async getRecipes(request: PaginatedQuery): Promise<Recipe[]> {
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-        axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
-        // axios.defaults.
-
         return (await axios.get('https://localhost:7250/api/recipe', { params: request })).data;
     }
 

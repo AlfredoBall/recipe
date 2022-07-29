@@ -1,0 +1,17 @@
+.recipe-img {
+    width: -webkit-fill-available;
+}
+
+.saving-options {
+    display: flex;
+    align-items: flex-end;
+}
+
+.is-danger {
+    color: red;
+    background-color: green;
+}
+
+div {
+    background-color: blue;
+}

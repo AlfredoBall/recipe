@@ -7,51 +7,51 @@ namespace Recipe.API.Data
     {
         public static void Initialize(RecipeContext context)
         {
-            context.Database.EnsureCreated();
+            // context.Database.EnsureCreated();
             
-            // context.Recipes.RemoveRange(context.Recipes);
+            // // context.Recipes.RemoveRange(context.Recipes);
 
-            context.SaveChanges();
+            // context.SaveChanges();
 
-            // Look for any recipes.
-            if (!context.Recipes.Any())
-            {
-                var recipes = new Recipe[]
-                {
-                    new Recipe {
-                        Title = "Test Title - 1",
-                        Instructions = new List<Instruction> {
-                            new Instruction {
-                                Text = "Chop up the fruit"
-                            }
-                        }
-                    },
-                    new Recipe {
-                        Title = "Test Title - 2"
-                    },
-                };
+            // // Look for any recipes.
+            // if (!context.Recipes.Any())
+            // {
+            //     var recipes = new Recipe[]
+            //     {
+            //         new Recipe {
+            //             Title = "Test Title - 1",
+            //             Instructions = new List<Instruction> {
+            //                 new Instruction {
+            //                     Text = "Chop up the fruit"
+            //                 }
+            //             }
+            //         },
+            //         new Recipe {
+            //             Title = "Test Title - 2"
+            //         },
+            //     };
 
-                context.AddRange(recipes);
-            }
+            //     context.AddRange(recipes);
+            // }
 
-            if (!context.Planning.Any())
-            {
-                var planItems = new PlanItem[]
-                {
-                    new PlanItem {
-                        Text = "Test",
-                        Type = PlanItemType.GroceryList
-                    },
-                    new PlanItem {
-                        Text = "Kitchen Item",
-                        Type = PlanItemType.Kitchen
-                    }
-                };
+            // if (!context.Planning.Any())
+            // {
+            //     var planItems = new PlanItem[]
+            //     {
+            //         new PlanItem {
+            //             Text = "Test",
+            //             Type = PlanItemType.GroceryList
+            //         },
+            //         new PlanItem {
+            //             Text = "Kitchen Item",
+            //             Type = PlanItemType.Kitchen
+            //         }
+            //     };
 
-                context.AddRange(planItems);
-            }
+            //     context.AddRange(planItems);
+            // }
             
-            context.SaveChanges();
+            // context.SaveChanges();
         }
     }
 

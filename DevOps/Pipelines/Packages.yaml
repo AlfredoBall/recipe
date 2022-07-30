@@ -6,7 +6,7 @@ resources:
 
 name: 1.0.$(Rev:r)
 stages:
-- stage: 'Create and Publish Packages'
+- stage: 'Create_Publish_Packages'
   displayName: 'Create and Publish Packages'
   jobs:
   - job: 'RestoreAndBuild'

@@ -4,24 +4,17 @@ trigger:
 resources:
 - repo: self
 
+# you have to setup a step to use powershell to get the storage key once you've setup the backend storage account
+# key for the terraform state file
+
 stages:
 - stage: Provision
-  displayName: Provision Infrastructure
+  displayName: 'Terraform Azure Environment'
   jobs: 
   - job: Provision
-    displayName: Provision Infrastructure
+    displayName: 'Provisioning Container Instance'
     pool:
       vmImage: ubuntu-latest
     variables:
-      - group: 
+      - group: TerraformServicePrincipal
     steps:
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: 'DevOps/Infrastructure'
-        Contents: '**'
-        TargetFolder: '$(build.artifactstagingdirectory)/Terraform'
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'

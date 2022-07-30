@@ -19,12 +19,12 @@ resource "azurerm_resource_group" "recipe-sql" {
 }
 
 resource "azurerm_mssql_server" "recipe-sql-server" {
-    name = "recipe-azuresql-server-124703172"
-    location = azurerm_resource_group.recipe-sql.location
-    administrator_login_password = "Pa294w0rD-124703172" # This should come from the DevOps secret as a var
-    administrator_login = "azureuser"
-    version = "12.0"
-    resource_group_name = azurerm_resource_group.recipe-sql.name
+  name                         = "recipe-azuresql-server-124703172"
+  location                     = azurerm_resource_group.recipe-sql.location
+  administrator_login_password = "Pa294w0rD-124703172" # This should come from the DevOps secret as a var
+  administrator_login          = "azureuser"
+  version                      = "12.0"
+  resource_group_name          = azurerm_resource_group.recipe-sql.name
 }
 
 resource "azurerm_mssql_firewall_rule" "recipe-sql-firewall-rule" {

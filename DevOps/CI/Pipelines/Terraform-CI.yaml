@@ -1,0 +1,25 @@
+trigger:
+- main
+
+resources:
+- repo: self
+
+stages:
+- stage: Provision
+  displayName: Provision Infrastructure
+  jobs: 
+  - job: Provision
+    displayName: Provision Infrastructure
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: 'DevOps/Infrastructure'
+        Contents: '**'
+        TargetFolder: '$(build.artifactstagingdirectory)/Terraform'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'

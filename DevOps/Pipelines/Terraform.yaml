@@ -18,3 +18,22 @@ stages:
     variables:
       - group: TerraformServicePrincipal
     steps:
+    - task: TerraformInstaller@0
+      inputs:
+        terraformVersion: 'latest'
+    - task: TerraformCLI@0
+      inputs:
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/DevOps/Infrastructure/Terraform'
+        allowTelemetryCollection: true
+    - task: TerraformCLI@0
+      inputs:
+        command: 'apply'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/DevOps/Infrastructure/Terraform'
+        commandOptions: '-auto-approve'
+        allowTelemetryCollection: true
+      env:
+        ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+        ARM_TENANT_ID: $(ARM_TENANT_ID)
+        ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+        ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)

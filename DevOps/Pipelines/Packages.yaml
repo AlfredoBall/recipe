@@ -4,10 +4,47 @@ trigger:
 resources:
 - repo: self
 
+name: 1.0.$(Rev:r)
 stages:
 - stage: 'Create and Publish Packages'
   displayName: 'Create and Publish Packages'
   jobs:
-  - job: 'Compile'
+  - job: 'RestoreAndBuild'
     displayName: 'Restore and Build Recipe.Data.Entity project'
     steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet restore Recipe.Data.Entity project'
+      inputs:
+        command: 'restore'
+        projects: '**/*Recipe.Data.Entity.csproj'
+        feedsToUse: 'select'
+        vstsFeed: '956acd23-e780-49af-9158-b0db91222f7f/cfe9839c-fb70-4c01-99a8-a18e7d35abf5'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build Recipe.Data.Entity project'
+      inputs:
+        command: 'build'
+        projects: '**/*Recipe.Data.Entity.csproj'
+  - job: 'Publish'
+    displayName: 'Create and Publish NuGet Package'
+    dependsOn: 'RestoreAndBuild'
+    condition: succeeded()
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet pack Recipe.Data.Entity project'
+      inputs:
+        command: 'pack'
+        packagesToPack: '**/*Recipe.Data.Entity.csproj'
+        versioningScheme: 'byBuildNumber'
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet push Recipe.Data.Entity package'
+      inputs:
+        command: 'push'
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+        nuGetFeedType: 'internal'
+        publishVstsFeed: '956acd23-e780-49af-9158-b0db91222f7f/cfe9839c-fb70-4c01-99a8-a18e7d35abf5'
+    - task: PublishBuildArtifacts@1
+      displayName: 'publish artifact Recipe.Data.Entity.nupkg'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        TargetPath: '\\Recipe.Data.Entity\$(Build.DefinitionName)\$(Build.BuildNumber)'
+        publishLocation: 'Container'

@@ -1,0 +1,13 @@
+trigger:
+- main
+
+resources:
+- repo: self
+
+stages:
+- stage: 'Create and Publish Packages'
+  displayName: 'Create and Publish Packages'
+  jobs:
+  - job: 'Compile'
+    displayName: 'Restore and Build Recipe.Data.Entity project'
+    steps:

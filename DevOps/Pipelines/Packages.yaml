@@ -1,8 +1,8 @@
-trigger:
-- main
+# trigger:
+# - main
 
-resources:
-- repo: self
+# resources:
+# - repo: self
 
 name: 1.0.$(Rev:r)
 stages:

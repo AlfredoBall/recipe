@@ -1,8 +1,8 @@
 # trigger:
 # - main
 
-resources:
-- repo: self
+# resources:
+# - repo: self
 
 # you have to setup a step to use powershell to get the storage key once you've setup the backend storage account
 # key for the terraform state file

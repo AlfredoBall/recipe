@@ -29,7 +29,4 @@ stages:
     - script: |
         ls
         echo "----"
-    - task: DotNetCoreCLI@2
-      inputs:
-        command: 'run'
-        arguments: 'RecipeBundle.exe --connection "Server=recipe-azuresql-server-124703172.database.windows.net;Database=Recipe;User Id=azureuser;Password=Pa294w0rD-124703172"'
+        ./RecipeBundle --connection "Server=recipe-azuresql-server-124703172.database.windows.net;Database=Recipe;User Id=azureuser;Password=Pa294w0rD-124703172"

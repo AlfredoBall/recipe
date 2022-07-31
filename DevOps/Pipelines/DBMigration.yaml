@@ -27,4 +27,4 @@ stages:
         custom: 'ef '
         arguments: migrations bundle -o RecipeBundle.exe --project "Code/Data/Recipe.Data.Entity/Recipe.Data.Entity.csproj"
     - script: |
-        RecipeBundle --connection "Server=recipe-azuresql-server-124703172.database.windows.net;Database=Recipe;User Id=azureuser;Password=Pa294w0rD-124703172"
+        Code/Data/Recipe.Data.Entity/RecipeBundle --connection "Server=recipe-azuresql-server-124703172.database.windows.net;Database=Recipe;User Id=azureuser;Password=Pa294w0rD-124703172"

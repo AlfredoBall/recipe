@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Recipe.API.Data
+namespace Recipe.Data.Entity
 {
     public class PlanItem
     {

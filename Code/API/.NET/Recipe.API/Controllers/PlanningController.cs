@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Recipe.API.Data;
+using Recipe.Data.Entity;
 
 namespace Recipe.API.Controllers;
 

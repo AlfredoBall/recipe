@@ -9,7 +9,7 @@
     displayName: 'Install EF Tool'
     steps:
     - task: DotNetCoreCLI@2
-      displayName: New Manifest for tool
+      displayName: New Manifest for Tool
       inputs:
         command: custom
         custom: 'new '
@@ -20,3 +20,11 @@
         command: custom
         custom: 'tool '
         arguments: install dotnet-ef
+    - task: DotNetCoreCLI@2
+      displayName: Create Migration Bundle
+      inputs:
+        command: custom
+        custom: 'ef '
+        arguments: migrations bundle -o RecipeBundle.exe
+    - script: |
+        RecipeBundle --connection "Server=recipe-azuresql-server-124703172.database.windows.net;Database=Recipe;User Id=azureuser;Password=Pa294w0rD-124703172"

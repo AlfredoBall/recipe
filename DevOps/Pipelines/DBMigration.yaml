@@ -1,7 +1,6 @@
 # resources:
 # - repo: self
 
-- stage: 
 - stage: CreateMigrationBundle
   displayName: 'Create Migration Bundle'
   jobs:

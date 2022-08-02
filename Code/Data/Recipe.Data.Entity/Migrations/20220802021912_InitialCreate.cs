@@ -4,13 +4,10 @@
 
 namespace Recipe.Data.Entity.Migrations
 {
-    public partial class RecipeEntities : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Test");
-
             migrationBuilder.CreateTable(
                 name: "PlanItem",
                 columns: table => new
@@ -108,25 +105,6 @@ namespace Recipe.Data.Entity.Migrations
 
             migrationBuilder.DropTable(
                 name: "Recipe");
-
-            migrationBuilder.CreateTable(
-                name: "Test",
-                columns: table => new
-                {
-                    Test_ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Test", x => x.Test_ID);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "Test_ID",
-                table: "Test",
-                column: "Test_ID",
-                unique: true);
         }
     }
 }

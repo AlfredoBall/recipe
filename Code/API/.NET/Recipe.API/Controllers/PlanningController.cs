@@ -8,49 +8,49 @@ namespace Recipe.API.Controllers;
 [Route("api/planning")]
 public class PlanningController : ControllerBase
 {
-    // private readonly RecipeContext _context;
+    private readonly Recipe.Data.Context _context;
 
-    // public PlanningController(Recipe.API.Data.RecipeContext context)
-    // {
-    //     _context = context;
-    // }
+    public PlanningController(Recipe.Data.Context context)
+    {
+        _context = context;
+    }
 
-    // [HttpGet]
-    // [Route("groceryList")]
-    // public IEnumerable<Recipe.API.Data.Ingredient> GetGroceryList()
-    // {
-    //     return _context.Planning.Where(planItem => planItem.Type == PlanItemType.GroceryList).Select(planItem => new Ingredient{
-    //         Text = planItem.Text
-    //     }).ToList();
-    // }
+    [HttpGet]
+    [Route("groceryList")]
+    public IEnumerable<Ingredient> GetGroceryList()
+    {
+        return _context.Planning.Where(planItem => planItem.Type == PlanItemType.GroceryList).Select(planItem => new Ingredient{
+            Text = planItem.Text
+        }).ToList();
+    }
 
-    // [HttpGet]
-    // [Route("kitchen")]
-    // public IEnumerable<Recipe.API.Data.Ingredient> GetKitchen()
-    // {
-    //     return _context.Planning.Where(planItem => planItem.Type == PlanItemType.Kitchen).Select(planItem => new Ingredient{
-    //         Text = planItem.Text
-    //     }).ToList();
-    // }
+    [HttpGet]
+    [Route("kitchen")]
+    public IEnumerable<Ingredient> GetKitchen()
+    {
+        return _context.Planning.Where(planItem => planItem.Type == PlanItemType.Kitchen).Select(planItem => new Ingredient{
+            Text = planItem.Text
+        }).ToList();
+    }
 
-    // // TODO Refactor
-    // [HttpPost]
-    // public Recipe.API.Data.Recipe Post(Recipe.API.Data.Recipe recipe)
-    // {
-    //     var existingRecipe = _context.Recipes.Where(r => r.Title == recipe.Title).SingleOrDefault();
+    // TODO Refactor
+    [HttpPost]
+    public Recipe.Data.Entity.Recipe Post(Recipe.Data.Entity.Recipe recipe)
+    {
+        var existingRecipe = _context.Recipes.Where(r => r.Title == recipe.Title).SingleOrDefault();
 
-    //     if (existingRecipe != null)
-    //     {
-    //         _context.Remove(existingRecipe);
+        if (existingRecipe != null)
+        {
+            _context.Remove(existingRecipe);
 
-    //         _context.SaveChanges();
-    //     }
+            _context.SaveChanges();
+        }
         
-    //     recipe.ID = null;
-    //     _context.Recipes.Add(recipe);
+        recipe.ID = null;
+        _context.Recipes.Add(recipe);
 
-    //     _context.SaveChanges();
+        _context.SaveChanges();
 
-    //     return recipe;
-    // }
+        return recipe;
+    }
 }

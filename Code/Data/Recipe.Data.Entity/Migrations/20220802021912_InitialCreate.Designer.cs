@@ -12,8 +12,8 @@ using Recipe.Data;
 namespace Recipe.Data.Entity.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220731223007_RecipeEntities")]
-    partial class RecipeEntities
+    [Migration("20220802021912_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

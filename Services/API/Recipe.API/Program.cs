@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +9,18 @@ builder.Services.AddControllers();
 // TODO 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var conStrBuilder = new SqlConnectionStringBuilder();
+
+conStrBuilder.InitialCatalog = builder.Configuration["Database"];
+conStrBuilder.DataSource = builder.Configuration["DataSource"];
+conStrBuilder.UserID = builder.Configuration["UserID"];
+conStrBuilder.Password = builder.Configuration["Password"];
+
+Console.WriteLine("RECIPE CONNECTION STRING: " + conStrBuilder.ConnectionString);
+
 builder.Services.AddDbContext<Recipe.Data.Context>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(conStrBuilder.ConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
@@ -44,7 +55,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

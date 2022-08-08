@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: recipe-database-cip
+spec:
+  type: ClusterIP
+  selector:
+    app: recipe-database
+  ports:
+    - name: recipe-database
+      protocol: TCP
+      port: 1433
+      targetPort: 1433

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipe-database-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recipe-database
+  template:
+    metadata:
+      labels:
+        app: recipe-database
+    spec:
+      containers:
+        - name: recipe-database
+          image: mcr.microsoft.com/mssql/server:2022-latest
+          env:
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: MSSQL_SA_PASSWORD
+            value: "SuperSecretPassw0rd"
+          - name: MSSQL_PID
+            value: "Developer"
+          - name: MSSQL_TCP_PORT
+            value: "1433"

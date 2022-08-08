@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipe-api-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recipe-api
+  template:
+    metadata:
+      labels:
+        app: recipe-api
+    spec:
+      containers:
+        - name: recipe-api
+          image: alfredoball/recipe.api:latest
+          env:
+          - name: DATASOURCE
+            value: "recipe-database-cip"

@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: recipe-data-job
+spec:
+  template:
+    spec:
+      containers:
+        - name: recipe-data
+          image: alfredoball/recipe.data:latest
+          env:
+          - name: DATASOURCE
+            value: recipe-database-cip
+          - name: DATABASE
+            value: Recipe
+          - name: USERID
+            value: sa
+          - name: PASSWORD
+            value: SuperSecretPassw0rd
+      restartPolicy: Never

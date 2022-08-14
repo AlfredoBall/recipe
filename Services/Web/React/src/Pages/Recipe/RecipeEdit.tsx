@@ -7,7 +7,6 @@ import * as yup from 'yup';
 
 import _ from 'lodash'
 
-import '../Styles/RecipeEdit.css'
 import s from '../Styles/RecipeEdit.css'
 import c from 'clsx'
 

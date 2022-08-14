@@ -24,7 +24,7 @@ module.exports = merge(baseConfig, {
     optimization: {
       minimize: false
     },
-    plugins: [
+    // plugins: [
     //   new webpack.NormalModuleReplacementPlugin(
     //     /Services/,
     //     function (resource) {
@@ -34,5 +34,5 @@ module.exports = merge(baseConfig, {
     //       );
     //     }
     //   )
-    ]
+    // ]
 });

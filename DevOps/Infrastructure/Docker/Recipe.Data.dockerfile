@@ -1,10 +1,10 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
 
-COPY *.csproj ./
+COPY ./Services/Data/Recipe.Data.Entity/*.csproj ./
 RUN dotnet restore
 
-COPY . ./
+COPY ./Services/Data/Recipe.Data.Entity ./
 
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"

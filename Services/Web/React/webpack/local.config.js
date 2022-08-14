@@ -20,15 +20,15 @@ module.exports = merge(baseConfig, {
     optimization: {
       minimize: false
     },
-    plugins: [
-      new webpack.NormalModuleReplacementPlugin(
-        /Services/,
-        function (resource) {
-          resource.request = resource.request.replace(
-            /Services/,
-            'Services/Fakes'
-          );
-        }
-      )
-    ]
+    // plugins: [
+    //   new webpack.NormalModuleReplacementPlugin(
+    //     /Services/,
+    //     function (resource) {
+    //       resource.request = resource.request.replace(
+    //         /Services/,
+    //         'Services/Fakes'
+    //       );
+    //     }
+    //   )
+    // ]
 });

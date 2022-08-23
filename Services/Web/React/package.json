@@ -26,7 +26,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "local": "webpack serve --config webpack/local.config.js --open",
+    "local": "webpack --config webpack/local.config.js --open",
     "dev": "webpack serve --config webpack/dev.config.js --open",
     "build": "webpack --config webpack/local.config.js",
     "test": "jest",
@@ -53,6 +53,7 @@
     "@babel/preset-env": "7.18.2",
     "@babel/preset-react": "7.17.12",
     "@faker-js/faker": "7.2.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@types/jest": "^28.1.2",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
@@ -75,6 +76,7 @@
     "jest-environment-jsdom": "^28.1.2",
     "mini-css-extract-plugin": "2.6.1",
     "msw": "^0.42.3",
+    "react-refresh": "^0.14.0",
     "redux-mock-store": "^1.5.4",
     "source-map-loader": "4.0.0",
     "style-loader": "3.3.1",
@@ -84,6 +86,7 @@
     "typescript": "4.7.4",
     "webpack": "5.73.0",
     "webpack-cli": "4.10.0",
-    "webpack-dev-server": "4.9.2"
+    "webpack-dev-server": "4.9.2",
+    "webpack-hot-middleware": "^2.25.2"
   }
 }

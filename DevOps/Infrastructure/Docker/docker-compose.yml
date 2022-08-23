@@ -1,7 +1,3 @@
-version: '3.4'
-
-# --env-file
-
 services:
   recipe-database:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -13,7 +9,7 @@ services:
       MSSQL_PID: Developer
       MSSQL_TCP_PORT: 1433
   recipe-data:
-    image: alfredoball/recipe.data:latest
+    image: recipe.data:latest
     environment:
       DATASOURCE: recipe-database
       DATABASE: Recipe
@@ -25,11 +21,12 @@ services:
       context: ${CONTEXT}
       dockerfile: "${DOCKER}/Recipe.Data.dockerfile"
   recipe-api:
-    image: alfredoball/recipe.api:latest
+    image: recipe.api:latest
     environment:
       DATASOURCE: recipe-database
       DATABASE: Recipe
       USERID: sa
+      PASSWORD:
     depends_on:
       - recipe-data
     expose:
@@ -38,9 +35,11 @@ services:
       context: ${CONTEXT}
       dockerfile: "${DOCKER}/Recipe.API.dockerfile"
   recipe-web:
+    profiles:
+      - donotstart
     image: alfredoball/recipe.web:latest
     environment:
-      BASE_URL: "http://localhost:4000/api"
+      BASE_URL:
     expose:
       - "8080"
     ports:
@@ -48,6 +47,8 @@ services:
     build:
       context: ${CONTEXT}
       dockerfile: "${DOCKER}/Recipe.Web.dockerfile"
+    volumes:
+      - ${CONTEXT}/Services/Web/React:usr/src/app
   recipe-api-proxy:
     image: nginx:alpine
     volumes:

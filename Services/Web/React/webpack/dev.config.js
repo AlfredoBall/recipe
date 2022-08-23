@@ -2,6 +2,7 @@ const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 const path = require('path');
 const baseConfig = require('./base.config.js');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = merge(baseConfig, {
     devtool: 'inline-source-map', //inline source maps should not be used in production
@@ -24,6 +25,10 @@ module.exports = merge(baseConfig, {
     optimization: {
       minimize: false
     },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new ReactRefreshWebpackPlugin()
+    ]
     // plugins: [
     //   new webpack.NormalModuleReplacementPlugin(
     //     /Services/,

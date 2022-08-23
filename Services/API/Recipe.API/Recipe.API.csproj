@@ -8,13 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="7.0.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="12.12.1" />
+    <PackageReference Include="HotChocolate.Data.EntityFramework" Version="12.12.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.7">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-*" />
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0-*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0-*" >
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.7" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
     <PackageReference Include="Recipe.Data.Entity" Version="1.0.10" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />

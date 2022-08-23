@@ -35,7 +35,10 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: "babel-loader"
+                        loader: "babel-loader",
+                        // options: {
+                        //     plugins: ['react-refresh/babel'],
+                        //   },
                     },
                     {
                         loader: 'ts-loader',

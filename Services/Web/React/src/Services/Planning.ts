@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import axios from 'axios'
-import config from '../config.json'
 
 import { IPlanningService } from "./Types"
 import { Ingredient } from '../State/Types'
+
+const config = window._env_;
 
 class PlanningService implements IPlanningService {
     async getKitchen(): Promise<Ingredient[]> {

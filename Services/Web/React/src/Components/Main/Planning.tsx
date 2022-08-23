@@ -26,7 +26,7 @@ const Planning = () => {
 
     return (
         <>
-            <h2>Ingredient Planning</h2>
+            <h2>Ingredient Plannings - Alfredo!</h2>
               <ul className="nav nav-tabs">
                 <li className={c({active: activeTab === "GroceryList"})}>
                     <button onClick={() => setActiveTab("GroceryList")} data-bs-toggle="tooltip" data-bs-placement="top" title="Grocery List"><ShoppingBasketIcon/></button>

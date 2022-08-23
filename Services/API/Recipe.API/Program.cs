@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
+using GraphQL.Server.Ui.Voyager;
+using Recipe.API.GraphQL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,16 +14,34 @@ builder.Services.AddSwaggerGen();
 
 var conStrBuilder = new SqlConnectionStringBuilder();
 
+builder.Configuration.AddEnvironmentVariables().AddUserSecrets<Program>();
+
 conStrBuilder.InitialCatalog = builder.Configuration["Database"];
 conStrBuilder.DataSource = builder.Configuration["DataSource"];
 conStrBuilder.UserID = builder.Configuration["UserID"];
 conStrBuilder.Password = builder.Configuration["Password"];
+conStrBuilder.Encrypt = false;
+// ^^^
+//https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/enable-encrypted-connections-to-the-database-engine?view=sql-server-ver16
 
 Console.WriteLine("RECIPE CONNECTION STRING: " + conStrBuilder.ConnectionString);
 
-builder.Services.AddDbContext<Recipe.Data.Context>(options =>
+// https://youtu.be/QPelWd9L9ck Alternative
+builder.Services
+    .AddGraphQLServer()
+    .AddConfiguration()
+    .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
+
+// https://github.com/dotnet/efcore/pull/28708/files
+builder.Services.AddDbContextFactory<Recipe.Data.Context>(options =>
                 options.UseSqlServer(conStrBuilder.ConnectionString));
+
+builder.Services.AddDbContextPool<Recipe.Data.Context>(options =>
+                options.UseSqlServer(conStrBuilder.ConnectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
 
 var app = builder.Build();
 
@@ -56,8 +76,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
+
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints => {
+    endpoints.MapGraphQL();
+});
+
+app.UseGraphQLVoyager("/graphql-voyager", new VoyagerOptions() {
+    GraphQLEndPoint = "/graphql"
+});
 
 app.Run();

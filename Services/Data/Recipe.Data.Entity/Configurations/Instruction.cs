@@ -10,6 +10,8 @@ internal class InstructionConfiguration  : IEntityTypeConfiguration<Instruction>
     private const string TableName = "Instruction";
     public void Configure(EntityTypeBuilder<Instruction> builder)
     {
-        builder.ToTable(TableName);
+        builder
+            .ToTable(TableName)
+            .HasIndex(c => c.Order);
     }
 }

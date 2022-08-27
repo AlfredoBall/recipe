@@ -10,9 +10,11 @@ namespace Recipe.API.GraphQL
             return builder
 
             # region Recipe
+
             .AddObjectType<Recipe.Data.Entity.Recipe>(x => {
                 x.Description("A Recipe");
                 x.Ignore(d => d.ImageData);
+                x.Field("monkey").Resolve(m => "monkey man");
             })
             .AddQueryType(x => {
                 // This can be created like a controller

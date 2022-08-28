@@ -12,6 +12,12 @@ internal class InstructionConfiguration  : IEntityTypeConfiguration<Instruction>
     {
         builder
             .ToTable(TableName)
-            .HasIndex(c => c.Order);
+            .HasOne<Recipe>()
+            .WithMany()
+            .HasForeignKey(i => i.ID);
+        
+        builder.Property<int>("RecipeID").HasColumnName("Recipe_ID");
+
+        builder.HasIndex(c => c.Order);
     }
 }

@@ -1,5 +1,6 @@
 using HotChocolate.Execution.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Recipe.API.Resolvers;
 
 namespace Recipe.API.GraphQL
 {
@@ -10,29 +11,58 @@ namespace Recipe.API.GraphQL
             return builder
 
             # region Recipe
-
+            
             .AddObjectType<Recipe.Data.Entity.Recipe>(x => {
-                x.Description("A Recipe");
-                x.Ignore(d => d.ImageData);
-                x.Field("monkey").Resolve(m => "monkey man");
+                x.Field(r => r.Ingredients).UsePaging().UseProjection();
+
+
+                // x.Description("A Recipe");
+                // // x.Name("recipe");
+                // x.Ignore(d => d.ImageData);
+                // x.Field("monkey") .Resolve(m => "monkey man");
+                // x.Field("recipe").Resolve(r => "blup blup");
             })
+            // .TryAddTypeInterceptor<FilterCollectionTypeInterceptor>()
             .AddQueryType(x => {
                 // This can be created like a controller
                 x.Name("GetRecipes").Description("Gets the recipes");
                 
                 // More than one top level field can be defined here, as if it were a separate controller action
 
-                x.Field("recipe")
-                    .Description("Recipes")
-                        .Argument("title", (t) => {
-                    t.Type<NonNullType<StringType>>();
+                // x.Field("plan").Description("Plan Items")
+                // .Resolve((ctx, ct) => {
+                //     return ctx.Service<Recipe.Data.Context>().Planning;
+                // });
+
+                x.Field("recipe").Description("Recipes")
+                //         .Argument("title", (t) => {
+                //     t.Type<NonNullType<StringType>>();
+                // })
+                .Use(next => async context => {
+                    await next(context);
                 })
-                .Resolve((ctx, ct) => {
-                    var title = ctx.ArgumentValue<string>("title");
-                    return ctx.Service<Recipe.Data.Context>().Recipes
-                        .Where(r => r.Title == title)
-                        .Include(r => r.Instructions);
-                });
+                .UseDbContext<Recipe.Data.Context>()
+                .ResolveWith<RecipeResolver>(r => r.GetRecipes(default!))
+                .UsePaging()
+                .UseProjection();
+
+                // x.Field("ingredients").Description("Ingredients")
+                // .UseDbContext<Recipe.Data.Context>()
+                // .ResolveWith<RecipeResolver>(r => r.GetIngredients(default!, default!))
+                // .UsePaging()
+                // .UseProjection();
+                // .Resolve((ctx, ct) => {
+                //     using (var scope = ctx.Services.CreateScope())
+                //     {
+                //         return scope.ServiceProvider.GetRequiredService<Recipe.Data.Context>().Recipes
+                //         .Include(r => r.Instructions)
+                //         .Include(r => r.Ingredients);
+                //     }
+                //     // var title = ctx.ArgumentValue<string>("title");
+                //     // return ctx.Service<Recipe.Data.Context>().Recipes
+                //     //     .Include(r => r.Instructions)
+                //     //     .Include(r => r.Ingredients);
+                // });
             });
             # endregion
         }

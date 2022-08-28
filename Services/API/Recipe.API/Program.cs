@@ -30,12 +30,20 @@ Console.WriteLine("RECIPE CONNECTION STRING: " + conStrBuilder.ConnectionString)
 builder.Services
     .AddGraphQLServer()
     .AddConfiguration()
+    // .AddQueryType<Recipe.API.GraphQL.RecipeQuery>(x => {
+    //     x.Name("alfredoball");
+
+    //     x.Field("instructions")
+    // })
+    // // .AddQueryableOffsetPagingProvider(default!, true)
+    .AddQueryableCursorPagingProvider(default!, true)
+    .AddProjections()
     .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
 
 // https://github.com/dotnet/efcore/pull/28708/files
 builder.Services.AddDbContextFactory<Recipe.Data.Context>(options =>
                 options.UseSqlServer(conStrBuilder.ConnectionString));
-
+                
 builder.Services.AddDbContextPool<Recipe.Data.Context>(options =>
                 options.UseSqlServer(conStrBuilder.ConnectionString));
 

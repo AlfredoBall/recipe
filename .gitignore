@@ -1,3 +1,4 @@
 .terraform
 efbundle.exe
 env-config.js
+.vscode/

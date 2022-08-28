@@ -12,7 +12,7 @@ namespace Recipe.API.Resolvers
 
         public IQueryable<Recipe.Data.Entity.Ingredient> GetIngredients([ScopedService] Context context, [Parent]Recipe.Data.Entity.Recipe parent)
         {
-            return context.Ingredients.Where(i => i.Recipe_ID == parent.ID);
+            return context.Ingredients.Where(i => i.Recipe.ID == parent.ID);
         }
     }
 }

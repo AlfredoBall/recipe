@@ -39,6 +39,7 @@ builder.Services
     .AddQueryableCursorPagingProvider(default!, true)
     .AddFiltering()
     .AddProjections()
+    .AddSorting()
     .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
 
 // https://github.com/dotnet/efcore/pull/28708/files

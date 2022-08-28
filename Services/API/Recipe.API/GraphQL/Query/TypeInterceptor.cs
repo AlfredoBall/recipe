@@ -11,7 +11,7 @@ namespace Recipe.API.GraphQL
         public class FilterCollectionTypeInterceptor : TypeInterceptor
     {
         private static bool IsCollectionType(Type t)
-            => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(ICollection<Instruction>);
+            => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<Instruction>);
 
         public override void OnBeforeRegisterDependencies(ITypeDiscoveryContext discoveryContext, DefinitionBase? definition,
             IDictionary<string, object?> contextData)

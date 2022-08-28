@@ -37,6 +37,7 @@ builder.Services
     // })
     // // .AddQueryableOffsetPagingProvider(default!, true)
     .AddQueryableCursorPagingProvider(default!, true)
+    .AddFiltering()
     .AddProjections()
     .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
 

@@ -11,7 +11,8 @@ namespace Recipe.API.GraphQL
         [UseProjection]
         public IQueryable<Recipe.Data.Entity.Recipe> GetRecipes([ScopedService] Context context)
         {
-            return context.Recipes;
+            return context.Recipes
+                            .Include(r => r.Ingredients);
         }
     }
 }

@@ -14,8 +14,8 @@ BEGIN
 	WHILE @IngredientCNT < 10
 	BEGIN
 		SET @IngredientCNT = @IngredientCNT + 1;
-		INSERT INTO Ingredient ([Text], RecipeID) VALUES (CONCAT('Ingredient-', @IngredientCnt), @RecipeID)
-		INSERT INTO Instruction ([Order], [Text], RecipeID) VALUES (@IngredientCNT, CONCAT('Instruction-', @IngredientCnt), @RecipeID)
+		INSERT INTO Ingredient ([Text], Recipe_ID) VALUES (CONCAT('Ingredient-', @IngredientCnt), @RecipeID)
+		INSERT INTO Instruction ([Order], [Text], Recipe_ID) VALUES (@IngredientCNT, CONCAT('Instruction-', @IngredientCnt), @RecipeID)
 	END
 
 	INSERT INTO PlanItem ([Text], [Type]) VALUES (CONCAT('Ingredient-', @RecipeCNT), 0);

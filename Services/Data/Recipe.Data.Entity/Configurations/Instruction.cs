@@ -11,10 +11,7 @@ internal class InstructionConfiguration  : IEntityTypeConfiguration<Instruction>
     public void Configure(EntityTypeBuilder<Instruction> builder)
     {
         builder
-            .ToTable(TableName)
-            .HasOne<Recipe>()
-            .WithMany()
-            .HasForeignKey(i => i.ID);
+            .ToTable(TableName);
         
         builder.Property<int>("RecipeID").HasColumnName("Recipe_ID");
 

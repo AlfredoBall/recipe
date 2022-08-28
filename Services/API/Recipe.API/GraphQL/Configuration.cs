@@ -12,8 +12,10 @@ namespace Recipe.API.GraphQL
 
             # region Recipe
             
+            
+
             .AddObjectType<Recipe.Data.Entity.Recipe>(x => {
-                x.Field(r => r.Ingredients).UsePaging().UseProjection();
+                x.Field(r => r.Ingredients).UseProjection().UseFiltering();
 
 
                 // x.Description("A Recipe");
@@ -44,7 +46,8 @@ namespace Recipe.API.GraphQL
                 .UseDbContext<Recipe.Data.Context>()
                 .ResolveWith<RecipeResolver>(r => r.GetRecipes(default!))
                 .UsePaging()
-                .UseProjection();
+                .UseProjection()
+                .UseFiltering();
 
                 // x.Field("ingredients").Description("Ingredients")
                 // .UseDbContext<Recipe.Data.Context>()

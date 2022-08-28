@@ -11,10 +11,7 @@ internal class IngredientConfiguration  : IEntityTypeConfiguration<Ingredient>
     public void Configure(EntityTypeBuilder<Ingredient> builder)
     {
         builder
-            .ToTable(TableName)
-            .HasOne<Recipe>()
-            .WithMany()
-            .HasForeignKey(i => i.ID);
+            .ToTable(TableName);
 
         builder.Property<int>("RecipeID").HasColumnName("Recipe_ID");
     }

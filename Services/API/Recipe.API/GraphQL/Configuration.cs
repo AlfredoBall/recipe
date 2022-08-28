@@ -15,7 +15,10 @@ namespace Recipe.API.GraphQL
             
 
             .AddObjectType<Recipe.Data.Entity.Recipe>(x => {
-                x.Field(r => r.Ingredients).UseProjection().UseFiltering();
+                x.Field(r => r.Ingredients)
+                .UseDbContext<Recipe.Data.Context>()
+                .ResolveWith<RecipeResolver>(r => r.GetIngredients(default!, default!))
+                .UseProjection().UseFiltering();
 
 
                 // x.Description("A Recipe");

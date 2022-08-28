@@ -4,13 +4,14 @@ using HotChocolate.Configuration;
 using HotChocolate.Types;
 using HotChocolate.Types.Descriptors;
 using HotChocolate.Types.Descriptors.Definitions;
+using Recipe.Data.Entity;
 
 namespace Recipe.API.GraphQL
 {
         public class FilterCollectionTypeInterceptor : TypeInterceptor
     {
         private static bool IsCollectionType(Type t)
-            => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(ICollection<>);
+            => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(ICollection<Instruction>);
 
         public override void OnBeforeRegisterDependencies(ITypeDiscoveryContext discoveryContext, DefinitionBase? definition,
             IDictionary<string, object?> contextData)
@@ -23,10 +24,10 @@ namespace Recipe.API.GraphQL
                 if (field.ResultType is null || !IsCollectionType(field.ResultType)) continue;
                 
                 var descriptor = field.ToDescriptor(discoveryContext.DescriptorContext)
-                    .UsePaging()
-                    // .UseFiltering()
+                    // .UsePaging()
                     // .UseSorting()
-                    .UseProjection();
+                    .UseProjection()
+                    .UseFiltering();
                 objectTypeDefinition.Fields[i] = descriptor.ToDefinition();
             }
         }

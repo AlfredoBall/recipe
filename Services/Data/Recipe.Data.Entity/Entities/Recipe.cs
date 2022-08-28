@@ -10,11 +10,10 @@ namespace Recipe.Data.Entity
         public string Title { get; set; }
         public string? ImageData { get; set; }
 
-        public ICollection<Instruction> Instructions { get; set; } = new List<Instruction>();
+        public IList<Instruction> Instructions { get; set; } = new List<Instruction>();
 
-        [UseProjection]
         [UseFiltering]
         [UseSorting]
-        public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        public IList<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
     }
 }

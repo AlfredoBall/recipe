@@ -42,10 +42,10 @@ namespace Recipe.API.GraphQL
                 // .Resolve((ctx, ct) => {
                 //     return ctx.Service<Recipe.Data.Context>().Planning;
                 // });
-                x.Field(r => r.Ingredients)
-                .UseDbContext<Recipe.Data.Context>()
-                .ResolveWith<RecipeResolver>(r => r.GetIngredients(default!, default!))
-                .UseProjection().UseFiltering().UseSorting();
+                // x.Field(r => r.Ingredients)
+                // .UseDbContext<Recipe.Data.Context>()
+                // .ResolveWith<RecipeResolver>(r => r.GetIngredients(default!, default!))
+                // .UseProjection().UseFiltering().UseSorting();
 
                 x.Field("recipe").Description("Recipes")
                 //         .Argument("title", (t) => {

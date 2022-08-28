@@ -9,6 +9,8 @@ namespace Recipe.API.GraphQL
         [UseDbContext(typeof(Context))]
         [UsePaging(IncludeTotalCount = true, DefaultPageSize = 10)]
         [UseProjection]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Recipe.Data.Entity.Recipe> GetRecipes([ScopedService] Context context)
         {
             return context.Recipes

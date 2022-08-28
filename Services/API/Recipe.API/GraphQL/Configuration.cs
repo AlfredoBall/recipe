@@ -14,24 +14,25 @@ namespace Recipe.API.GraphQL
             
             
 
-            .AddObjectType<Recipe.Data.Entity.Recipe>(x => {
-                x.Field(r => r.Ingredients)
-                // .UseDbContext<Recipe.Data.Context>()
-                // .ResolveWith<RecipeResolver>(r => r.GetIngredients(default!, default!))
-                .UseProjection().UseFiltering().UseSorting();
+            // .AddObjectType<Recipe.Data.Entity.Recipe>(x => {
+            //     x.Field(r => r.Ingredients)
+            //     // .UseDbContext<Recipe.Data.Context>()
+            //     // .ResolveWith<RecipeResolver>(r => r.GetIngredients(default!, default!))
+            //     .UseProjection().UseFiltering().UseSorting();
 
 
-                // x.Description("A Recipe");
-                // // x.Name("recipe");
-                // x.Ignore(d => d.ImageData);
-                // x.Field("monkey") .Resolve(m => "monkey man");
-                // x.Field("recipe").Resolve(r => "blup blup");
-            })
+            //     // x.Description("A Recipe");
+            //     // // x.Name("recipe");
+            //     // x.Ignore(d => d.ImageData);
+            //     // x.Field("monkey") .Resolve(m => "monkey man");
+            //     // x.Field("recipe").Resolve(r => "blup blup");
+            // })
             // .TryAddTypeInterceptor<FilterCollectionTypeInterceptor>()
             // .AddQueryType<RecipeQuery>(x => {
             //     x.Field(c => c.)
             // })
-            .AddQueryType(x => {
+            
+            .AddQueryType<Recipe.Data.Entity.Recipe>(x => {
                 // This can be created like a controller
                 x.Name("GetRecipes").Description("Gets the recipes");
                 
@@ -41,6 +42,10 @@ namespace Recipe.API.GraphQL
                 // .Resolve((ctx, ct) => {
                 //     return ctx.Service<Recipe.Data.Context>().Planning;
                 // });
+                x.Field(r => r.Ingredients)
+                .UseDbContext<Recipe.Data.Context>()
+                .ResolveWith<RecipeResolver>(r => r.GetIngredients(default!, default!))
+                .UseProjection().UseFiltering().UseSorting();
 
                 x.Field("recipe").Description("Recipes")
                 //         .Argument("title", (t) => {
@@ -51,10 +56,7 @@ namespace Recipe.API.GraphQL
                 })
                 .UseDbContext<Recipe.Data.Context>()
                 .ResolveWith<RecipeResolver>(r => r.GetRecipes(default!))
-                .UsePaging()
-                .UseProjection()
-                .UseFiltering()
-                .UseSorting();
+                .UsePaging().UseProjection().UseFiltering().UseSorting();
 
                 // x.Field("ingredients").Description("Ingredients")
                 // .UseDbContext<Recipe.Data.Context>()

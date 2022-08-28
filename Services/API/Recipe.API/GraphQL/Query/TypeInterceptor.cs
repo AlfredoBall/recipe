@@ -10,7 +10,7 @@ namespace Recipe.API.GraphQL
 {
         public class FilterCollectionTypeInterceptor : TypeInterceptor
     {
-        private static bool IsCollectionType(Type t)
+        private static bool IsListType(Type t)
             => t.IsGenericType && t.GetGenericTypeDefinition() == typeof(IList<Instruction>);
 
         public override void OnBeforeRegisterDependencies(ITypeDiscoveryContext discoveryContext, DefinitionBase? definition,
@@ -21,7 +21,7 @@ namespace Recipe.API.GraphQL
             for (var i = 0; i < objectTypeDefinition.Fields.Count; i++)
             {
                 var field = objectTypeDefinition.Fields[i];
-                if (field.ResultType is null || !IsCollectionType(field.ResultType)) continue;
+                if (field.ResultType is null || !IsListType(field.ResultType)) continue;
                 
                 var descriptor = field.ToDescriptor(discoveryContext.DescriptorContext)
                     // .UsePaging()

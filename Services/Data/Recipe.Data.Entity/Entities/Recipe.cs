@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
 
 namespace Recipe.Data.Entity
 {
@@ -10,7 +9,12 @@ namespace Recipe.Data.Entity
         public Nullable<int> ID { get; set; }
         public string Title { get; set; }
         public string? ImageData { get; set; }
-        public virtual IList<Instruction> Instructions { get; set; } = new List<Instruction>();
-        public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+
+        public virtual ICollection<Instruction> Instructions { get; set; } = new List<Instruction>();
+
+        [UseProjection]
+        [UseFiltering]
+        [UseSorting]
+        public virtual ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
     }
 }

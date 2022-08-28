@@ -29,12 +29,9 @@ Console.WriteLine("RECIPE CONNECTION STRING: " + conStrBuilder.ConnectionString)
 // https://youtu.be/QPelWd9L9ck Alternative
 builder.Services
     .AddGraphQLServer()
-    .AddConfiguration()
-    // .AddQueryType<Recipe.API.GraphQL.RecipeQuery>(x => {
-    //     x.Name("alfredoball");
-
-    //     x.Field("instructions")
-    // })
+    // .AddConfiguration()
+    .AddQueryType<Recipe.API.GraphQL.RecipeQuery>(x => {
+    })
     // // .AddQueryableOffsetPagingProvider(default!, true)
     .AddQueryableCursorPagingProvider(default!, true)
     .AddFiltering()

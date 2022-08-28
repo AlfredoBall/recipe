@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipe.Data;
 
@@ -11,9 +12,10 @@ using Recipe.Data;
 namespace Recipe.Data.Entity.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220828105217_Navigation properties -  5")]
+    partial class Navigationproperties5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +33,11 @@ namespace Recipe.Data.Entity.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ID"), 1L, 1);
 
-                    b.Property<int>("RecipeID")
-                        .HasColumnType("int")
-                        .HasColumnName("Recipe_ID");
+                    b.Property<int?>("RecipeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Recipe_ID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -122,13 +126,9 @@ namespace Recipe.Data.Entity.Migrations
 
             modelBuilder.Entity("Recipe.Data.Entity.Ingredient", b =>
                 {
-                    b.HasOne("Recipe.Data.Entity.Recipe", "Recipe")
+                    b.HasOne("Recipe.Data.Entity.Recipe", null)
                         .WithMany("Ingredients")
-                        .HasForeignKey("RecipeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
+                        .HasForeignKey("RecipeID");
                 });
 
             modelBuilder.Entity("Recipe.Data.Entity.Instruction", b =>

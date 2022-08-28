@@ -8,5 +8,5 @@
         [Column("Ingredient_ID")]
         public Nullable<int> ID { get; set; }
         public string Text { get; set; }
-        public int Recipe_ID { get; set; }
+        public Recipe Recipe { get; set; }
     }

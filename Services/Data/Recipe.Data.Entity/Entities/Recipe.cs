@@ -10,11 +10,11 @@ namespace Recipe.Data.Entity
         public string Title { get; set; }
         public string? ImageData { get; set; }
 
-        public virtual ICollection<Instruction> Instructions { get; set; } = new List<Instruction>();
+        public ICollection<Instruction> Instructions { get; set; } = new List<Instruction>();
 
         [UseProjection]
         [UseFiltering]
         [UseSorting]
-        public virtual ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        public ICollection<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
     }
 }

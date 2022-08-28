@@ -9,7 +9,7 @@ services:
       MSSQL_PID: Developer
       MSSQL_TCP_PORT: 1433
   recipe-data:
-    image: recipe.data:latest
+    image: alfredoball/recipe.data:latest
     environment:
       DATASOURCE: recipe-database
       DATABASE: Recipe

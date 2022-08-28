@@ -6,7 +6,7 @@
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Instruction_ID")]
-        public int ID { get; set; }
+        public Nullable<int> ID { get; set; }
         public int Order { get; set; }
         public string Text { get; set; }
     }

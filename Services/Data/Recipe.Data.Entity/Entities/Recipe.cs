@@ -7,7 +7,7 @@ namespace Recipe.Data.Entity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("Recipe_ID")]
-        public int ID { get; set; }
+        public Nullable<int> ID { get; set; }
         public string Title { get; set; }
         public string? ImageData { get; set; }
         public List<Instruction> Instructions { get; set; } = new List<Instruction>();

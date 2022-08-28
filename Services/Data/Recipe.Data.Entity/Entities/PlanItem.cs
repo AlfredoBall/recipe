@@ -6,7 +6,7 @@ namespace Recipe.Data.Entity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("PlanItem_ID")]
-        public int ID { get; set; }
+        public Nullable<int> ID { get; set; }
         public string Text { get; set; }
         public PlanItemType Type { get; set; }
     }

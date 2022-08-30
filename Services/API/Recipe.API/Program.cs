@@ -30,9 +30,7 @@ Console.WriteLine("RECIPE CONNECTION STRING: " + conStrBuilder.ConnectionString)
 builder.Services
     .AddGraphQLServer()
     // .AddConfiguration()
-    .AddQueryType<Recipe.API.GraphQL.RecipeQuery>(x => {
-    })
-    // // .AddQueryableOffsetPagingProvider(default!, true)
+    .AddQueryType<Recipe.API.GraphQL.RecipeQuery>()
     .AddQueryableCursorPagingProvider(default!, true)
     .AddFiltering()
     .AddProjections()

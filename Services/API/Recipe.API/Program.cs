@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using GraphQL.Server.Ui.Voyager;
 using Recipe.API.GraphQL;
+using Finbuckle.MultiTenant;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +29,13 @@ Console.WriteLine("RECIPE CONNECTION STRING: " + conStrBuilder.ConnectionString)
 
 // https://youtu.be/QPelWd9L9ck Alternative
 builder.Services
-    .AddGraphQLServer()
+    .AddMultiTenant<TenantInfo>()
+        .WithStrategy()
+        .WithHostStrategy()
+        .WithConfigurationStore();
+
+
+ builder.Services.AddGraphQLServer()
     // .AddConfiguration()
     .AddQueryType<Recipe.API.GraphQL.RecipeQuery>()
     .AddQueryableCursorPagingProvider(default!, true)
@@ -38,6 +45,15 @@ builder.Services
     .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
 
 // https://github.com/dotnet/efcore/pull/28708/files
+
+
+
+
+builder.Services.AddPooledDbContextFactory()
+
+
+
+
 builder.Services.AddDbContextFactory<Recipe.Data.Context>(options =>
                 options.UseSqlServer(conStrBuilder.ConnectionString));
                 
@@ -82,6 +98,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
+
+app.UseMultiTenant();
 
 app.UseAuthorization();
 

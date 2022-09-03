@@ -31,8 +31,10 @@ namespace Recipe.API.GraphQL
             // .AddQueryType<RecipeQuery>(x => {
             //     x.Field(c => c.)
             // })
+        
             
             .AddQueryType<Recipe.Data.Entity.Recipe>(x => {
+
                 // This can be created like a controller
                 x.Name("GetRecipes").Description("Gets the recipes");
                 

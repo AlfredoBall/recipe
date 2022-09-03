@@ -9,6 +9,8 @@ namespace Recipe.Data;
 public class Context : DbContext
 {
     public Context() : base() {}
+
+    public Context(DbContextOptions<Context> options) : base(options) {}
     public Context(DbContextOptions<Context> options, TenantInfo tenantInfo) : base(options) {}
 
     public DbSet<Recipe.Data.Entity.Recipe> Recipes { get; set; }
@@ -26,8 +28,18 @@ public class Context : DbContext
         modelBuilder.ApplyConfiguration(new IngredientConfiguration());
     }
 
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    // {
+    //     optionsBuilder.UseSqlServer();
+    // }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(TenantInfo.ConnectionString);
+        if (TenantInfo != null) {
+            optionsBuilder.UseSqlServer(TenantInfo.ConnectionString);
+        }
+        else {
+            optionsBuilder.UseSqlServer();
+        }
     }
 }

@@ -30,8 +30,7 @@ Console.WriteLine("RECIPE CONNECTION STRING: " + conStrBuilder.ConnectionString)
 // https://youtu.be/QPelWd9L9ck Alternative
 builder.Services
     .AddMultiTenant<TenantInfo>()
-        .WithStrategy()
-        .WithHostStrategy()
+        .WithStaticStrategy("butt")
         .WithConfigurationStore();
 
 
@@ -42,23 +41,28 @@ builder.Services
     .AddFiltering()
     .AddProjections()
     .AddSorting()
-    .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
+    .RegisterDbContext<Recipe.Data.Context>();
+    // .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
 
 // https://github.com/dotnet/efcore/pull/28708/files
 
 
 
 
-builder.Services.AddPooledDbContextFactory()
+// builder.Services.AddPooledDbContextFactory()
 
 
 
 
-builder.Services.AddDbContextFactory<Recipe.Data.Context>(options =>
-                options.UseSqlServer(conStrBuilder.ConnectionString));
+// builder.Services.AddDbContextFactory<Recipe.Data.Context>(options =>
+//                 options.UseSqlServer(conStrBuilder.ConnectionString));
+
+builder.Services.AddDbContext<Recipe.Data.Context>(options => {});
+
+// builder.Services.AddDbContextPool<Recipe.Data.Context>(options => {});
                 
-builder.Services.AddDbContextPool<Recipe.Data.Context>(options =>
-                options.UseSqlServer(conStrBuilder.ConnectionString));
+// builder.Services.AddDbContextPool<Recipe.Data.Context>(options =>
+//                 options.UseSqlServer(conStrBuilder.ConnectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

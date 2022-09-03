@@ -21,3 +21,5 @@ BEGIN
 	INSERT INTO PlanItem ([Text], [Type]) VALUES (CONCAT('Ingredient-', @RecipeCNT), 0);
 	INSERT INTO PlanItem ([Text], [Type]) VALUES (CONCAT('Ingredient-', @RecipeCNT + 10), 1);
 END;
+
+INSERT INTO Ingredient ([Text], Recipe_ID) VALUES ('Ingredient-ABC', 1)

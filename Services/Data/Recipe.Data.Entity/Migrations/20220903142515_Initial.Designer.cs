@@ -12,8 +12,8 @@ using Recipe.Data;
 namespace Recipe.Data.Entity.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220827042117_Instruction Order")]
-    partial class InstructionOrder
+    [Migration("20220903142515_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,8 +33,9 @@ namespace Recipe.Data.Entity.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ID"), 1L, 1);
 
-                    b.Property<int?>("RecipeID")
-                        .HasColumnType("int");
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int")
+                        .HasColumnName("Recipe_ID");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -59,8 +60,9 @@ namespace Recipe.Data.Entity.Migrations
                     b.Property<int>("Order")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RecipeID")
-                        .HasColumnType("int");
+                    b.Property<int>("RecipeID")
+                        .HasColumnType("int")
+                        .HasColumnName("Recipe_ID");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -77,12 +79,12 @@ namespace Recipe.Data.Entity.Migrations
 
             modelBuilder.Entity("Recipe.Data.Entity.PlanItem", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int?>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("PlanItem_ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("ID"), 1L, 1);
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -122,16 +124,22 @@ namespace Recipe.Data.Entity.Migrations
 
             modelBuilder.Entity("Recipe.Data.Entity.Ingredient", b =>
                 {
-                    b.HasOne("Recipe.Data.Entity.Recipe", null)
+                    b.HasOne("Recipe.Data.Entity.Recipe", "Recipe")
                         .WithMany("Ingredients")
-                        .HasForeignKey("RecipeID");
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("Recipe.Data.Entity.Instruction", b =>
                 {
                     b.HasOne("Recipe.Data.Entity.Recipe", null)
                         .WithMany("Instructions")
-                        .HasForeignKey("RecipeID");
+                        .HasForeignKey("RecipeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Recipe.Data.Entity.Recipe", b =>

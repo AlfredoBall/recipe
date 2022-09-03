@@ -54,8 +54,8 @@ builder.Services
 
 
 
-// builder.Services.AddDbContextFactory<Recipe.Data.Context>(options =>
-//                 options.UseSqlServer(conStrBuilder.ConnectionString));
+builder.Services.AddDbContextFactory<Recipe.Data.Context>(options =>
+                options.UseSqlServer(conStrBuilder.ConnectionString));
 
 builder.Services.AddDbContext<Recipe.Data.Context>(options => {});
 

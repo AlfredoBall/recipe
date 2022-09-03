@@ -10,7 +10,7 @@ public class Context : DbContext
 {
     public Context() : base() {}
 
-    public Context(DbContextOptions<Context> options) : base(options) {}
+    // public Context(DbContextOptions<Context> options) : base(options) {}
     public Context(DbContextOptions<Context> options, TenantInfo tenantInfo) : base(options) {}
 
     public DbSet<Recipe.Data.Entity.Recipe> Recipes { get; set; }

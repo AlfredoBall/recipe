@@ -3,6 +3,8 @@ using System.Data.SqlClient;
 using GraphQL.Server.Ui.Voyager;
 using Recipe.API.GraphQL;
 using Finbuckle.MultiTenant;
+using Finbuckle.MultiTenant.Core;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,31 +35,51 @@ builder.Services
         .WithStaticStrategy("butt")
         .WithConfigurationStore();
 
+builder.Services.AddHttpContextAccessor();
 
- builder.Services.AddGraphQLServer()
+builder.Services.AddDbContextFactory<Recipe.Data.Context, Recipe.API.DbContextFactory>();
+
+//builder.Services.AddTransient<Recipe.API.DbContextFactory>();
+
+//builder.Services.AddDbContext<Recipe.Data.Context>((serviceProvider, options) =>
+//{
+//    var yar = serviceProvider.GetService<IHttpContextAccessor>().HttpContext;
+
+//    var context = yar.GetMultiTenantContext<TenantInfo>().TenantInfo;
+
+//    var tenantInfo = Microsoft.AspNetCore.Http.HttpContext. .GetMultiTenantContext<Recipe.Data.Context>().TenantInfo;
+//    options.UseSqlServer(context.ConnectionString);
+//});
+
+
+//builder.Services.AddDbContextFactory<Recipe.Data.Context>((serviceProvider, options) => {
+//    var yar = serviceProvider.GetService<IHttpContextAccessor>().HttpContext;
+
+//    var context = yar.GetMultiTenantContext<TenantInfo>().TenantInfo;
+
+//    //var tenantInfo = Microsoft.AspNetCore.Http.HttpContext. .GetMultiTenantContext<Recipe.Data.Context>().TenantInfo;
+//    options.UseSqlServer(context.ConnectionString);
+//});
+
+//builder.Services.AddDbContext<Recipe.Data.Context>(options =>
+//                options.UseSqlServer(conStrBuilder.ConnectionString));
+
+builder.Services.AddGraphQLServer()
     // .AddConfiguration()
     .AddQueryType<Recipe.API.GraphQL.RecipeQuery>()
     .AddQueryableCursorPagingProvider(default!, true)
     .AddFiltering()
     .AddProjections()
     .AddSorting()
-    .RegisterDbContext<Recipe.Data.Context>();
-    // .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
+    // .RegisterDbContext<Recipe.Data.Context>();
+    .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
 
 // https://github.com/dotnet/efcore/pull/28708/files
 
 
 
 
-// builder.Services.AddPooledDbContextFactory()
-
-
-
-
-builder.Services.AddDbContextFactory<Recipe.Data.Context>(options =>
-                options.UseSqlServer(conStrBuilder.ConnectionString));
-
-builder.Services.AddDbContext<Recipe.Data.Context>(options => {});
+// builder.Services.AddDbContext<Recipe.Data.Context>(options => {});
 
 // builder.Services.AddDbContextPool<Recipe.Data.Context>(options => {});
                 

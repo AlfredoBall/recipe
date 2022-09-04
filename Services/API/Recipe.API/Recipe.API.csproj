@@ -21,8 +21,11 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
-    <PackageReference Include="Recipe.Data.Entity" Version="1.0.23" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Recipe.Data.Entity\Recipe.Data.Entity.csproj" />
   </ItemGroup>
 
 </Project>

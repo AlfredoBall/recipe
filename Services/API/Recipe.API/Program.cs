@@ -5,6 +5,12 @@ using Recipe.API.GraphQL;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Core;
 using System;
+using Microsoft.Extensions.Primitives;
+using HotChocolate.Language;
+using System.Text.Json;
+using Azure.Core;
+using Newtonsoft.Json;
+using Recipe.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,65 +36,29 @@ conStrBuilder.Encrypt = false;
 Console.WriteLine("RECIPE CONNECTION STRING: " + conStrBuilder.ConnectionString);
 
 // https://youtu.be/QPelWd9L9ck Alternative
-builder.Services
-    .AddMultiTenant<TenantInfo>()
-        .WithStaticStrategy("butt")
-        .WithConfigurationStore();
 
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContextFactory<Recipe.Data.Context, Recipe.API.DbContextFactory>();
 
-//builder.Services.AddTransient<Recipe.API.DbContextFactory>();
-
-//builder.Services.AddDbContext<Recipe.Data.Context>((serviceProvider, options) =>
-//{
-//    var yar = serviceProvider.GetService<IHttpContextAccessor>().HttpContext;
-
-//    var context = yar.GetMultiTenantContext<TenantInfo>().TenantInfo;
-
-//    var tenantInfo = Microsoft.AspNetCore.Http.HttpContext. .GetMultiTenantContext<Recipe.Data.Context>().TenantInfo;
-//    options.UseSqlServer(context.ConnectionString);
-//});
-
-
-//builder.Services.AddDbContextFactory<Recipe.Data.Context>((serviceProvider, options) => {
-//    var yar = serviceProvider.GetService<IHttpContextAccessor>().HttpContext;
-
-//    var context = yar.GetMultiTenantContext<TenantInfo>().TenantInfo;
-
-//    //var tenantInfo = Microsoft.AspNetCore.Http.HttpContext. .GetMultiTenantContext<Recipe.Data.Context>().TenantInfo;
-//    options.UseSqlServer(context.ConnectionString);
-//});
-
-//builder.Services.AddDbContext<Recipe.Data.Context>(options =>
-//                options.UseSqlServer(conStrBuilder.ConnectionString));
+builder.Services
+    .AddMultiTenant<TenantInfo>()
+        .WithHeaderStrategy()
+        .WithConfigurationStore();
 
 builder.Services.AddGraphQLServer()
     // .AddConfiguration()
     .AddQueryType<Recipe.API.GraphQL.RecipeQuery>()
+    .AddMutationType<Recipe.API.GraphQL.Mutation>()
     .AddQueryableCursorPagingProvider(default!, true)
     .AddFiltering()
     .AddProjections()
     .AddSorting()
-    // .RegisterDbContext<Recipe.Data.Context>();
     .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
 
-// https://github.com/dotnet/efcore/pull/28708/files
-
-
-
-
-// builder.Services.AddDbContext<Recipe.Data.Context>(options => {});
-
-// builder.Services.AddDbContextPool<Recipe.Data.Context>(options => {});
-                
-// builder.Services.AddDbContextPool<Recipe.Data.Context>(options =>
-//                 options.UseSqlServer(conStrBuilder.ConnectionString));
+// https://github.com/dotnet/efcore/pull/28708/
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-
 
 var app = builder.Build();
 
@@ -99,10 +69,10 @@ var app = builder.Build();
 //     var services = scope.ServiceProvider;
 //     try
 //     {   
-        
+
 //         // TODO pass in the PlanningContext
 //         var recipeContext = services.GetRequiredService<Recipe.Data.Context>();
-           // A DbInitializer would need to be created for local seeding
+// A DbInitializer would need to be created for local seeding
 //         Recipe.API.Data.DbInitializer.Initialize(recipeContext);
 //     }
 //     catch (Exception ex)

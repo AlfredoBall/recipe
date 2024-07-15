@@ -3,12 +3,10 @@ using Recipe.Data.Entity;
 using Recipe.Data.Entity.Configuration;
 using Finbuckle.MultiTenant;
 
-namespace Recipe.Data;
+namespace Recipe.Data.Entity;
 
 public class Context : DbContext
 {
-    private ITenantInfo _tenantInfo;
-
     public Context() : base() {}
 
     // public Context(DbContextOptions<Context> options) : base(options) {}
@@ -22,9 +20,9 @@ public class Context : DbContext
         TenantInfo = tenantInfo;
     }
 
-    public ITenantInfo TenantInfo { get; }
+    public ITenantInfo? TenantInfo { get; }
 
-    public DbSet<Recipe.Data.Entity.Recipe> Recipes { get; set; }
+    public DbSet<Recipe> Recipes { get; set; }
     public DbSet<Instruction> Instructions { get; set; }
     public DbSet<Ingredient> Ingredients { get; set; }
     public DbSet<PlanItem> Planning { get; set; }
@@ -44,6 +42,6 @@ public class Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(TenantInfo.ConnectionString);
+        optionsBuilder.UseSqlServer(TenantInfo?.ConnectionString);
     }
 }

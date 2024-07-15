@@ -54,6 +54,7 @@ namespace Recipe.API.GraphQL
                 //     t.Type<NonNullType<StringType>>();
                 // })
                 .Use(next => async context => {
+
                     await next(context);
                 })
                 .UseDbContext<Recipe.Data.Context>()

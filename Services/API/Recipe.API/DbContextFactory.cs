@@ -3,6 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Recipe.Data;
+using System.Collections;
+using System;
+using System.Reflection;
+using HotChocolate.Execution;
+using System.Data.SqlClient;
 
 namespace Recipe.API
 {
@@ -15,11 +20,6 @@ namespace Recipe.API
             _httpContextAccessor = httpContextAccessor;
         }
 
-        //public DbContextFactory(DbContextOptions<Recipe.Data.Context> options)
-        //{
-
-        //}
-
         public Context CreateDbContext()
         {
             var httpContext = _httpContextAccessor.HttpContext;
@@ -28,11 +28,7 @@ namespace Recipe.API
 
             var context = new Recipe.Data.Context(tenantInfo);
 
-            //context.Database.SetConnectionString(tenantInfo.ConnectionString);
-
             return context;
-
-            throw new NotImplementedException();
         }
     }
 }

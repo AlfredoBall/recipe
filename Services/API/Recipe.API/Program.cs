@@ -58,8 +58,6 @@ builder.Services.AddGraphQLServer()
 
 // https://github.com/dotnet/efcore/pull/28708/
 
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
 var app = builder.Build();
 
 // Most likely won't even use this for local development - instead a bundle will be created

@@ -11,8 +11,18 @@ stages:
 - stage: Provision
   displayName: 'Terraform Azure Environment'
   jobs: 
+  - job: Secrets
+    displayName: 'Get Azure Key Vault Secrets'
+    steps:
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'alfredoball Azure Resource Manager'
+        KeyVaultName: 'recipe-dev-kv'
+        SecretsFilter: '*'
+        RunAsPreJob: true
   - job: Provision
     displayName: 'Provisioning Container Instance'
+    dependsOn: Secrets
     pool:
       vmImage: ubuntu-latest
     variables:
@@ -33,7 +43,7 @@ stages:
         commandOptions: '-auto-approve'
         allowTelemetryCollection: true
       env:
-        ARM_CLIENT_ID: $(ARM_CLIENT_ID)
-        ARM_TENANT_ID: $(ARM_TENANT_ID)
-        ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
-        ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+        ARM_CLIENT_ID: $(ARM-CLIENT-ID)
+        ARM_TENANT_ID: $(ARM-TENANT-ID)
+        ARM_CLIENT_SECRET: $(ARM-CLIENT-SECRET)
+        ARM_SUBSCRIPTION_ID: $(ARM-SUBSCRIPTION-ID)

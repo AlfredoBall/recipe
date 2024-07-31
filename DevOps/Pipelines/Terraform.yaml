@@ -11,8 +11,12 @@ stages:
 - stage: Provision
   displayName: 'Terraform Azure Environment'
   jobs: 
-  - job: Secrets
-    displayName: 'Get Azure Key Vault Secrets'
+  - job: Provision
+    displayName: 'Provisioning Container Instance'
+    pool:
+      vmImage: ubuntu-latest
+    variables:
+      - group: TerraformServicePrincipal
     steps:
     - task: AzureKeyVault@2
       inputs:
@@ -20,14 +24,6 @@ stages:
         KeyVaultName: 'recipe-dev-kv'
         SecretsFilter: '*'
         RunAsPreJob: true
-  - job: Provision
-    displayName: 'Provisioning Container Instance'
-    dependsOn: Secrets
-    pool:
-      vmImage: ubuntu-latest
-    variables:
-      - group: TerraformServicePrincipal
-    steps:
     - task: TerraformInstaller@0
       inputs:
         terraformVersion: 'latest'

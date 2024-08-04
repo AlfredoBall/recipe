@@ -15,8 +15,8 @@ stages:
     displayName: 'Provisioning Container Instance'
     pool:
       vmImage: ubuntu-latest
-    variables:
-      - group: TerraformServicePrincipal
+    # variables:
+    #  - group: TerraformServicePrincipal
     steps:
     # - task: AzureKeyVault@2
     #   inputs:
@@ -38,8 +38,8 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/DevOps/Infrastructure/Terraform'
         commandOptions: '-auto-approve'
         allowTelemetryCollection: true
-      env:
-        ARM_CLIENT_ID: $(ARM-CLIENT-ID)
-        ARM_TENANT_ID: $(ARM-TENANT-ID)
-        ARM_CLIENT_SECRET: $(ARM-CLIENT-SECRET)
-        ARM_SUBSCRIPTION_ID: $(ARM-SUBSCRIPTION-ID)
+      # env:
+      #  ARM_CLIENT_ID: $(ARM-CLIENT-ID)
+      #  ARM_TENANT_ID: $(ARM-TENANT-ID)
+      #  ARM_CLIENT_SECRET: $(ARM-CLIENT-SECRET)
+      #  ARM_SUBSCRIPTION_ID: $(ARM-SUBSCRIPTION-ID)

@@ -1,0 +1,15 @@
+name: Test
+on: workflow_dispatch
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+          source-url: https://nuget.pkg.github.com/alfredoball/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Create and Publish Packages
+        run: dotnet build ./Services/Data/Recipe.Data.Entity/Recipe.Data.Entity.csproj

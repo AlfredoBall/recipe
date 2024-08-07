@@ -1,4 +1,4 @@
-name: Test
+name: Create and Publish Packages
 on: workflow_dispatch
 jobs:
   test:
@@ -11,5 +11,11 @@ jobs:
           source-url: https://nuget.pkg.github.com/alfredoball/index.json
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Create and Publish Packages
-        run: dotnet build ./Services/Data/Recipe.Data.Entity/Recipe.Data.Entity.csproj
+          PROJECT_PATH: ./Services/Data/Recipe.Data.Entity
+          PROJECT_FILE: Recipe.Data.Entity.csproj
+      - name: Build Project
+        run: dotnet build $PROJECT_FILE
+      - name: Create the Package
+        run: dotnet pack --configuration Release format('{0}/{1}', $PROJECT_PATH, $PROJECT_FILE)
+      # - name: Publish the Package to GPR
+      #   run: dotnet nuget push {{ $PROJECT_PATH }}/bin/Release/*.nupkg

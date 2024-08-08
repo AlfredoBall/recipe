@@ -26,5 +26,5 @@ jobs:
       - name: List Files
         run: |
             ls
-      # - name: Publish the Package to GPR
-      #   run: dotnet nuget push {{ format('{0}/bin/Release/Recipe.Data.Entity.*.nupkg', env.PROJECT_PATH) }}
+      - name: Publish the Package to GPR
+        run: dotnet nuget push **/*.nupkg

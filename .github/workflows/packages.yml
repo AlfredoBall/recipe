@@ -21,4 +21,4 @@ jobs:
         working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet pack ${{ env.PROJECT_FILE }} --output . --configuration Release
       - name: Publish the Package to GPR
-        run: dotnet nuget push ${{ format('{0}/bin/Release/Recipe.Data.Entity.nupkg', env.PROJECT_PATH) }}
+        run: dotnet nuget push ${{ format('{0}/bin/Release/Recipe.Data.Entity.*.nupkg', env.PROJECT_PATH) }}

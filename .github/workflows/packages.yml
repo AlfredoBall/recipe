@@ -2,7 +2,7 @@ name: Create and Publish Data Package
 on:
   push:
     paths:
-      - 'Services/'
+      - 'Services/Data/*'
   workflow_dispatch:
 env:
   NUGET_REGISTRY: https://nuget.pkg.github.com/alfredoball/index.json

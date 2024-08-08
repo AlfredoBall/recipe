@@ -18,6 +18,8 @@ jobs:
         working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet build ${{ env.PROJECT_FILE }}
       - name: Create Package
-        run: dotnet pack --configuration Release ${{ format('{0}/{1}/bin/Release/*nupkg', env.PROJECT_PATH, env.PROJECT_FILE) }}
+        working-directory: ${{ env.PROJECT_PATH }}
+        run: dotnet pack --no-build --output nupkgs --configuration Release
+        #  {{ format('{0}/{1}/bin/Release/*nupkg', env.PROJECT_PATH, env.PROJECT_FILE) }}
       # - name: Publish the Package to GPR
       #   run: dotnet nuget push {{ $PROJECT_PATH }}/bin/Release/*.nupkg

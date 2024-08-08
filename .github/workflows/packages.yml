@@ -14,7 +14,7 @@ jobs:
           PROJECT_PATH: ./Services/Data/Recipe.Data.Entity
           PROJECT_FILE: Recipe.Data.Entity.csproj
       - name: Build Project
-        run: dotnet build "${{ env.PROJECT_PATH}}/${{ env.PROJECT_FILE }}"
+        run: dotnet build "$PROJECT_PATH/$PROJECT_FILE"
       #   run: dotnet pack --configuration Release format('{0}/{1}/bin/Release/*nupkg', $PROJECT_PATH, $PROJECT_FILE)
       # - name: Publish the Package to GPR
       #   run: dotnet nuget push {{ $PROJECT_PATH }}/bin/Release/*.nupkg

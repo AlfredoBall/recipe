@@ -11,9 +11,10 @@ jobs:
           source-url: https://nuget.pkg.github.com/alfredoball/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build Project
+        env:
           PROJECT_PATH: ./Services/Data/Recipe.Data.Entity
           PROJECT_FILE: Recipe.Data.Entity.csproj
-      - name: Build Project
         working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet build ${{ env.PROJECT_FILE }}
       #   run: dotnet pack --configuration Release format('{0}/{1}/bin/Release/*nupkg', $PROJECT_PATH, $PROJECT_FILE)

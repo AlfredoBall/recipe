@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'Services/Data/*'
+      - '.github/gitversion.yml'
   workflow_dispatch:
 env:
   NUGET_REGISTRY: https://nuget.pkg.github.com/alfredoball/index.json

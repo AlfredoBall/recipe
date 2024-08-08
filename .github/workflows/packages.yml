@@ -1,7 +1,7 @@
 name: Create and Publish Data Package
 on: workflow_dispatch
 jobs:
-  test:
+  Build-Pack-Push:
     runs-on: ubuntu-latest
     defaults:
       run:

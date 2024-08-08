@@ -20,6 +20,6 @@ jobs:
       - name: Build Project
         run: dotnet build ${{ env.PROJECT_FILE }}
       - name: Create Package
-        run: dotnet pack ${{ env.PROJECT_FILE }} --no-build --output . --configuration Release
+        run: dotnet pack ${{ env.PROJECT_FILE }} --output . --configuration Release
       - name: Publish the Package to GHPR
         run: dotnet nuget push **/*.nupkg

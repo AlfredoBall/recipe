@@ -18,13 +18,8 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.RECIPE_PACKAGES_PAT }}
       - name: Build Project
-        # working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet build ${{ env.PROJECT_FILE }}
       - name: Create Package
-        # working-directory: ${{ env.PROJECT_PATH }}
-        run: dotnet pack ${{ env.PROJECT_FILE }} --output . --configuration Release
-      - name: List Files
-        run: |
-            ls
-      - name: Publish the Package to GPR
+        run: dotnet pack ${{ env.PROJECT_FILE }} --no-build --output . --configuration Release
+      - name: Publish the Package to GHPR
         run: dotnet nuget push **/*.nupkg

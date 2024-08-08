@@ -1,4 +1,4 @@
-name: Create and Publish Packages
+name: Create and Publish Data Package
 on: workflow_dispatch
 jobs:
   test:
@@ -16,7 +16,7 @@ jobs:
           dotnet-version: "8.0.x"
           source-url: https://nuget.pkg.github.com/alfredoball/index.json
         env:
-          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUGET_AUTH_TOKEN: ${{ secrets.RECIPE_PACKAGES_PAT }}
       - name: Build Project
         # working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet build ${{ env.PROJECT_FILE }}

@@ -3,6 +3,9 @@ on: workflow_dispatch
 jobs:
   test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PROJECT_PATH }}
     env:
       PROJECT_PATH: ./Services/Data/Recipe.Data.Entity
       PROJECT_FILE: Recipe.Data.Entity.csproj
@@ -15,10 +18,13 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Project
-        working-directory: ${{ env.PROJECT_PATH }}
+        # working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet build ${{ env.PROJECT_FILE }}
       - name: Create Package
-        working-directory: ${{ env.PROJECT_PATH }}
+        # working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet pack ${{ env.PROJECT_FILE }} --output . --configuration Release
-      - name: Publish the Package to GPR
-        run: dotnet nuget push ${{ format('{0}/bin/Release/Recipe.Data.Entity.*.nupkg', env.PROJECT_PATH) }}
+      - name: List Files
+        run: |
+            ls
+      # - name: Publish the Package to GPR
+      #   run: dotnet nuget push {{ format('{0}/bin/Release/Recipe.Data.Entity.*.nupkg', env.PROJECT_PATH) }}

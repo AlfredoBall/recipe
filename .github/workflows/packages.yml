@@ -15,12 +15,9 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Project
-        # env:
-        #   PROJECT_PATH: ./Services/Data/Recipe.Data.Entity
-        #   PROJECT_FILE: Recipe.Data.Entity.csproj
         working-directory: ${{ env.PROJECT_PATH }}
         run: dotnet build ${{ env.PROJECT_FILE }}
-      # - name: Create Package
-      #   run: dotnet pack --configuration Release format('{0}/{1}/bin/Release/*nupkg', $PROJECT_PATH, $PROJECT_FILE)
+      - name: Create Package
+        run: dotnet pack --configuration Release format('{0}/{1}/bin/Release/*nupkg', ${{ env.PROJECT_PATH }}, ${{ env.PROJECT_FILE }})
       # - name: Publish the Package to GPR
       #   run: dotnet nuget push {{ $PROJECT_PATH }}/bin/Release/*.nupkg

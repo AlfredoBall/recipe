@@ -1,20 +1,25 @@
 name: Create and Publish Data Package
-on: workflow_dispatch
+on:
+  push:
+    paths:
+      - 'Services/'
+  workflow_dispatch:
+env:
+  NUGET_REGISTRY: https://nuget.pkg.github.com/alfredoball/index.json
+  PROJECT_PATH: ./Services/Data/Recipe.Data.Entity
+  PROJECT_FILE: Recipe.Data.Entity.csproj
 jobs:
   Build-Pack-Push:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ${{ env.PROJECT_PATH }}
-    env:
-      PROJECT_PATH: ./Services/Data/Recipe.Data.Entity
-      PROJECT_FILE: Recipe.Data.Entity.csproj
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
-          source-url: https://nuget.pkg.github.com/alfredoball/index.json
+          source-url: ${{ env.NUGET_REGISTRY }}
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.RECIPE_PACKAGES_PAT }}
       - name: Build Project

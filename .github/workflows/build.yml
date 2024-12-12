@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 env:
   API_PROJECT_PATH: ./Services/API/Recipe.API.Entity
-  API_PROJECT_FILE: Recipe.API.Entity.csproj
+  API_PROJECT_FILE: Recipe.API.csproj
 jobs:
   Build:
     runs-on: ubuntu-latest

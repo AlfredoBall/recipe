@@ -6,13 +6,13 @@ namespace Recipe.API.GraphQL
 {
     public class RecipeQuery
     {
-        [UseDbContext(typeof(Context))]
+        [UseDataLoader(typeof(Context))]
         [UsePaging(IncludeTotalCount = true, DefaultPageSize = 10)]
         [UseProjection]
         [UseFiltering]
         [UseSorting]
         [GraphQLName("GetRecipes")]
-        public IQueryable<Recipe.Data.Entity.Recipe> GetRecipes([ScopedService] Context context)
+        public IQueryable<Recipe.Data.Entity.Recipe> GetRecipes(Context context)
         {
             var yar = context.Recipes.Include(r => r.Ingredients).ToList();
             return yar.AsQueryable();

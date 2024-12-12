@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Recipe.Data.Entity.Configuration;
+using Recipe.Data.Entity;
 
-namespace Recipe.Data.Entity;
+namespace Recipe.Data;
 
 public class Context : DbContext
 {
@@ -12,7 +13,7 @@ public class Context : DbContext
     {
     }
 
-    public DbSet<Recipe> Recipes { get; set; }
+    public DbSet<Recipe.Data.Entity.Recipe> Recipes { get; set; }
     public DbSet<Instruction> Instructions { get; set; }
     public DbSet<Ingredient> Ingredients { get; set; }
     public DbSet<PlanItem> Planning { get; set; }

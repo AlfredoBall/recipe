@@ -1,16 +1,6 @@
-using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
-using GraphQL.Server.Ui.Voyager;
-using Recipe.API.GraphQL;
 using Finbuckle.MultiTenant;
-using Finbuckle.MultiTenant.Core;
-using System;
-using Microsoft.Extensions.Primitives;
-using HotChocolate.Language;
-using System.Text.Json;
-using Azure.Core;
-using Newtonsoft.Json;
-using Recipe.API;
+using GraphQL.Server.Ui.Voyager;
+using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,8 +43,10 @@ builder.Services.AddGraphQLServer()
     .AddQueryableCursorPagingProvider(default!, true)
     .AddFiltering()
     .AddProjections()
-    .AddSorting()
-    .RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
+    .AddSorting();
+    //.AddDbContext
+    //.RegisterDbContextFactory
+    //.RegisterDbContext<Recipe.Data.Context>(DbContextKind.Pooled);
 
 // https://github.com/dotnet/efcore/pull/28708/
 

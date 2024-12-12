@@ -1,0 +1,18 @@
+# Retrieve the Build artifacts
+
+name: Create and Publish Data Package
+on:
+  workflow_dispatch:
+env:
+  API_PROJECT_PATH: ./Services/API/Recipe.Data.Entity
+  API_PROJECT_FILE: Recipe.API.Entity.csproj
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.API_PROJECT_PATH }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Project
+        run: dotnet build ${{ env.API_PROJECT_FILE }}

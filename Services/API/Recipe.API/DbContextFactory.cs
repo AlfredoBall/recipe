@@ -26,8 +26,9 @@ namespace Recipe.API
 
             var tenantInfo = httpContext.GetMultiTenantContext<TenantInfo>().TenantInfo;
 
-            var options = new DbContextOptionsBuilder<Recipe.Data.Context>().UseSqlServer(tenantInfo?.ConnectionString);
-            var context = new Recipe.Data.Context(options);
+            //var options = new DbContextOptionsBuilder<Recipe.Data.Context>().UseSqlServer(tenantInfo?.ConnectionString);
+            var options = new DbContextOptionsBuilder<Recipe.Data.Context>().UseSqlServer("a");
+            var context = new Recipe.Data.Context(options?.Options);
 
             return context;
         }

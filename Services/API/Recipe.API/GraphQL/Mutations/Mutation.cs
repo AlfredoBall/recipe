@@ -6,9 +6,9 @@ namespace Recipe.API.GraphQL
     public class Mutation
     {
         // TODO Remove the ID
-        [UseDbContext(typeof(Context))]
+        //[UseDbContext(typeof(Context))]
         [GraphQLName("AddRecipe")]
-        public async Task<Recipe.Data.Entity.Recipe> AddRecipe([ScopedService] Context context, Recipe.Data.Entity.Recipe recipe)
+        public async Task<Recipe.Data.Entity.Recipe> AddRecipe(Context context, Recipe.Data.Entity.Recipe recipe)
         {
             var existingRecipe = context.Recipes.Where(r => r.Title == recipe.Title).SingleOrDefault();
 

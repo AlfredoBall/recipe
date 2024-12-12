@@ -18,5 +18,5 @@ jobs:
         run: dotnet build ${{ env.API_PROJECT_FILE }}
       # - uses: actions/upload-artifact@v4
       - name: Publish Artifact
-        run: dotnet publish ${{ env.API_PROJECT_FILE }} -c Release -o release — nologo
+        run: dotnet publish ${{ env.API_PROJECT_FILE }} -c Release -o release
         

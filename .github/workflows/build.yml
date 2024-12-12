@@ -4,14 +4,14 @@ name: Build API
 on:
   workflow_dispatch:
 env:
-  API_PROJECT_PATH: ./Services/API/Recipe.API
+  API_PROJECT_PATH: Services/API/Recipe.API
   API_PROJECT_FILE: Recipe.API.csproj
 jobs:
   Build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ env.API_PROJECT_PATH }}
+        working-directory: ./${{ env.API_PROJECT_PATH }}
     steps:
       - uses: actions/checkout@v4
       - name: Build Project
@@ -23,5 +23,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Application_Artifact
-          path: /home/runner/work/recipe/${{ env.API_PROJECT_PATH }}/release/
+          path: /home/runner/work/recipe/recipe/${{ env.API_PROJECT_PATH }}/release/
         

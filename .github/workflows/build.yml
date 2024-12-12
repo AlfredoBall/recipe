@@ -4,7 +4,7 @@ name: Build API
 on:
   workflow_dispatch:
 env:
-  API_PROJECT_PATH: ./Services/API/Recipe.API.Entity
+  API_PROJECT_PATH: ./Services/API/Recipe.API
   API_PROJECT_FILE: Recipe.API.csproj
 jobs:
   Build:

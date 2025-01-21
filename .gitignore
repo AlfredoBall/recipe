@@ -1,4 +1,6 @@
-.terraform
+**/.terraform*
+**/.terraform*
+**/terraform.tfstate
 efbundle.exe
 env-config.js
 .vscode/
